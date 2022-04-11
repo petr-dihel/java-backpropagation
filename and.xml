@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<perceptronTask>
+    <perceptron>
+        <inputDescriptions>
+            <maximum>1.0</maximum>
+            <minimum>0.0</minimum>
+            <name>vstup_1</name>
+        </inputDescriptions>
+        <inputDescriptions>
+            <maximum>1.0</maximum>
+            <minimum>0.0</minimum>
+            <name>vstup_2</name>
+        </inputDescriptions>
+        <lerningRate>0.3</lerningRate>
+        <name>y</name>
+        <weights>
+            <weight>0.35881807273223454</weight>
+            <weight>0.25980279880809753</weight>
+            <weight>0.3286385083285597</weight>
+        </weights>
+    </perceptron>
+    <TestSet>
+        
+    </TestSet>
+    <TrainSet>
+    
+         <element>
+            <inputs>
+                <value>0.0</value>
+                <value>0.0</value>
+            </inputs>
+            <output>0.0</output>
+        </element>
+        <element>
+            <inputs>
+                <value>1.0</value>
+                <value>0.0</value>
+            </inputs>
+            <output>0.0</output>
+        </element>
+
+         <element>
+            <inputs>
+                <value>0.0</value>
+                <value>1.0</value>
+            </inputs>
+            <output>0.0</output>
+        </element>
+
+         <element>
+            <inputs>
+                <value>1.0</value>
+                <value>1.0</value>
+            </inputs>
+            <output>1.0</output>
+        </element>
+
+    </TrainSet>
+</perceptronTask>
