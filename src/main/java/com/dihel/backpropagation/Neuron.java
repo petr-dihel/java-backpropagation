@@ -17,6 +17,8 @@ public class Neuron {
 	
 	private double error;
 	
+	private double lastAdd = 0.0;
+	
 	@XmlElement(name="error")
 	public double getError() {
 		return error;
@@ -89,6 +91,14 @@ public class Neuron {
 	public String toString() {
 		return "Perceptron [weights=" + Arrays.toString(weights) + ", inputs="
 				+ Arrays.toString(inputs) + ", name=" + name + "]";
+	}
+	
+	public void setLastAdd(double add) {
+		this.lastAdd = add;
+	}
+	
+	public double getLastAdd() {
+		return this.lastAdd;
 	}
 	
 }

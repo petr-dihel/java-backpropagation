@@ -17,6 +17,7 @@ public class App {
 		String fileName = in.nextLine();
 		try {
 			FileReader fileReader = new FileReader(fileName);
+			
 			BackpropagationNeuronNet net = BackpropagationNeuronNet.readFromXml(fileReader);
 			net.initNeurons();
 			net.Train();
@@ -70,7 +71,7 @@ public class App {
 		Scanner in = new Scanner(System.in); 
 		String fileName = in.nextLine();
 		try {
-			if (Integer.parseInt(fileName) == 0) {
+			if (fileName.trim().length() < 3  && Integer.parseInt(fileName) == 0) {
 				fileName = "car_prosim_trained.xml";
 			}
 			FileReader fileReader = new FileReader(fileName);
@@ -80,7 +81,8 @@ public class App {
 			}
 			//java.cs.vsb.cz
 			//net.runRace("java.cs.vsb.cz", 9460, "Race", "dih0008", null);
-			net.runRace("localhost", 9461, "test", "dih0008", null);
+			//net.runRace("localhost", 9461, "test", "dih0008", null);
+			net.runRace("localhost", 9460, "Race", "dih0008", null);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

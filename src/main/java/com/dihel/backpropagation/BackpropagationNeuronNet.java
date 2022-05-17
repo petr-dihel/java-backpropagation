@@ -155,14 +155,14 @@ public class BackpropagationNeuronNet {
 				indexOffsetOfPreviousLayer -= previousLayerCount;
 				
 				weigths = this.neurons.get(indexOffset + i).getWeights();
-				sum += 1 * weigths[0]; 
+				sum += 1.0 * weigths[0]; 
 				
 				for (int j = 0; j < previousLayerCount; j++) {	
 					output = neurons.get(indexOffsetOfPreviousLayer + j).getOutput();
 					sum += weigths[j+1] * output;  
 				}
 				//System.out.println("Neuron " + i  + " Sum " + sum);
-				y = 1/(1 + Math.exp(-1 * sum));
+				y = 1.0/(1.0 + Math.exp(-1.0 * sum));
 				//System.out.println("Neuron " + i  + " y " + y);
 				this.neurons.get(indexOffset + i).setOutput(y);
 			}
@@ -185,6 +185,7 @@ public class BackpropagationNeuronNet {
 		for (int i = 0; i < output.length; i++) {
 			error += (expected[i] - output[i])*(expected[i] - output[i]);
 		}
+
 		error /= 2;
 		
 		
@@ -196,7 +197,8 @@ public class BackpropagationNeuronNet {
 				
 				// last
 				if (l == (layersCount-1)) {
-					double neuronError = (expected[i] - neuron.getOutput()) * (neuron.getOutput() * (1.0 - neuron.getOutput()));
+					//double neuronError = (expected[i] - neuron.getOutput()) * (neuron.getOutput() * (1.0 - neuron.getOutput()));
+					double neuronError = (neuron.getOutput() - expected[i]) * (neuron.getOutput() * (1.0 - neuron.getOutput()));
 					neuron.setError(neuronError);
 					
 				} else {
@@ -243,14 +245,15 @@ public class BackpropagationNeuronNet {
 						//Neuron previousNeuron = neurons.get(previousNeuronIndex+j-1);	
 						Neuron previousNeuron = neurons.get(previousNeuronIndex+j-1);	
 						//System.out.println("learningRate " + this.learningRate  + " error " + neuron.getError() + " output " + previousNeuron.getOutput());
-						addition = this.learningRate * neuron.getError() * previousNeuron.getOutput();
+						addition = -this.learningRate * neuron.getError() * previousNeuron.getOutput();
 					} else {
-						addition = this.learningRate * neuron.getError() * 1;
+						addition = -this.learningRate * neuron.getError() * 1;
 					}
 					//System.out.println("addition  " + addition + " error " + neuron.getError());
 					
 					//System.out.println("Neuron " + i  + " weig " + j + " addition " + addition);
-					neuron.addToWeight(j, addition);
+					neuron.addToWeight(j, addition + neuron.getLastAdd() * this.lastStepInfluenceLearningRate);
+					neuron.setLastAdd(addition);
 				}
 				
 				/*for ( double a : neuron.getWeights()) {
@@ -707,7 +710,7 @@ public class BackpropagationNeuronNet {
                 		System.out.println("Input " + i + " calue: " + inputs[i]);
                 		i++;
                 	}
-                	System.out.println("Inputs " + Arrays.toString(inputs));
+                	//System.out.println("Inputs " + Arrays.toString(inputs));
                     results = forward(inputs);
 
                 	System.out.println("results " + Arrays.toString(results));
